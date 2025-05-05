@@ -1,13 +1,295 @@
+/* src/index.css */
 body {
+  background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.auth-container {
+  max-width: 370px;
+  margin: 60px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 40px 32px 32px 32px;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.auth-container h2 {
+  margin-bottom: 24px;
+  color: #22223b;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.auth-form input {
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  background: #f7f7fa;
+  transition: border 0.2s;
+}
+
+.auth-form input:focus {
+  border: 1.5px solid #fda085;
+  outline: none;
+}
+
+.auth-form button, .oauth-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 16px 0 8px 0;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(253,160,133,0.08);
+  transition: background 0.2s, transform 0.1s;
+}
+
+.auth-form button:hover, .oauth-btn:hover {
+  background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.oauth-btn-github {
+  background: #24292e;
+  color: #fff;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.oauth-btn-github:hover {
+  background: #444950;
+}
+
+.oauth-btn-google {
+  background: #ea4335;
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.oauth-btn-google:hover {
+  background: #c5221f;
+}
+
+.auth-container p {
+  margin-top: 18px;
+  color: #555;
+  font-size: 0.98rem;
+}
+
+a {
+  color: #fda085;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #e74c3c;
+  margin: 10px 0;
+  font-size: 0.98rem;
+  background: #ffeaea;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.success {
+  color: #27ae60;
+  margin: 10px 0;
+  font-size: 0.98rem;
+  background: #eaffea;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* OAuth Button Styles */
+.oauth-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* GitHub Button */
+.oauth-button[style*="24292e"] {
+  background-color: #24292e;
+  color: #ffffff;
+}
+
+.oauth-button[style*="24292e"]:hover:not(:disabled) {
+  background-color: #2f363d;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Google Button */
+.oauth-button[style*="ffffff"] {
+  background-color: #ffffff;
+  color: #757575;
+  border: 1px solid #ddd;
+}
+
+.oauth-button[style*="ffffff"]:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading State */
+.oauth-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.oauth-icon {
+  font-size: 1.2em;
+}
+
+.oauth-icon.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* OAuth Buttons Container */
+.oauth-buttons {
+  width: 100%;
+  margin: 16px 0;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #eee;
+}
+
+.divider span {
+  padding: 0 10px;
+  color: #777;
+  font-size: 14px;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Add these styles to your existing CSS */
+.user-profile {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.profile-info p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #24292e;
+  text-decoration: none;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #24292e;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.github-link:hover {
+  background-color: #24292e;
+  color: white;
+}
+
+.error {
+  color: #dc3545;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #f8d7da;
+  margin: 1rem 0;
 }
